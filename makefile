@@ -1,7 +1,7 @@
 .PHONY: compile run
 
 SOURCE=./src/
-TEMPORAL=./temp
+TEMPORAL=./tmp
 BUILD=./build
 OUTPUT_FILE=$(BUILD)/planificadorprocesos.jar
 
