@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Main-Class: Main
+Implementation-Title: Planificador de Procesos
+Implementation-Version: 1.0.0
+Implementation-Vendor: EquipoSO
+Created-By: 22.0 (Oracle Corporation)
+Built-By: Brayan Téllez Cruz, Andrea Mata Ramírez, Romero Cervantes Jorge Arturo, Reyes Herrera Janeth Irandy
