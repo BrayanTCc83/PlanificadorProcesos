@@ -3,6 +3,7 @@
 SOURCE=./src/
 TEMPORAL=./tmp
 BUILD=./build
+INPUTS=Main proceso/Proceso proceso/ListaProcesos
 OUTPUT_FILE=$(BUILD)/planificadorprocesos.jar
 
 compile: $(OUTPUT_FILE)
@@ -18,11 +19,11 @@ $(BUILD):
 
 run: $(TEMPORAL)/*.class
 	@echo Ejecutando en modo de desarrollo.
-	java -cp $(TEMPORAL) Main
+	java -cp $(TEMPORAL) $(INPUTS)
 
-$(TEMPORAL)/*.class: | $(TEMPORAL)
+$(TEMPORAL)/*.class: $(addprefix $(SOURCE),$(addsuffix .java,$(INPUTS))) | $(TEMPORAL)
 	@echo Generando class files.
-	javac -d $(TEMPORAL) $(SOURCE)Main.java
+	javac -d $(TEMPORAL) $(addprefix $(SOURCE),$(addsuffix .java,$(INPUTS)))
 
 $(TEMPORAL):
 	@echo Creando carpeta de archivos temporales
