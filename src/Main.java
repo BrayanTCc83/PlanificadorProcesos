@@ -72,13 +72,13 @@ public class Main {
             tiempoEjecucionTotal += tiempoEjecucion;
 
             System.out.println("\n" + proceso);
-            System.out.println("\tTiempo de espera: " + tiempoEspera);
-            System.out.println("\tTiempo de respuesta: " + tiempoRespuesta);
-            System.out.println("\tTiempo de ejecucion: " + tiempoEjecucion);
+            System.out.println("\tTiempo de espera: " + tiempoEspera + " [ms].");
+            System.out.println("\tTiempo de respuesta: " + tiempoRespuesta + " [ms].");
+            System.out.println("\tTiempo de ejecucion: " + tiempoEjecucion + " [ms].");
         }
         System.out.println("\nEstadisticas finales");
-        System.out.println("\tTiempo de espera promedio: " + tiempoEsperaTotal / n);
-        System.out.println("\tTiempo de respuesta promedio: " + tiempoRespuestaTotal / n);
-        System.out.println("\tTiempo de ejecucion promedio: " + tiempoEjecucionTotal / n);
+        System.out.println("\tTiempo de espera promedio: " + tiempoEsperaTotal / n + " [ms].");
+        System.out.println("\tTiempo de respuesta promedio: " + tiempoRespuestaTotal / n + " [ms].");
+        System.out.println("\tTiempo de ejecucion promedio: " + tiempoEjecucionTotal / n + " [ms].");
     }
 }
