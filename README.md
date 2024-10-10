@@ -6,6 +6,7 @@ El proyecto fue desarrollado para la materia de Sistemas Operativos, consiste en
 
 ## Documentación
 La documentación correspondiente a este proyecto se puede encontrar en:
+[Documentación](https://docs.google.com/document/d/1LmWvrZofBSCJoATmQdrziWC4EHy_jDRCppJTGdCcu9I/edit?usp=sharing)
 
 ## Previos
 Para poder usar el planificador de procesos, antes de compilar y ejecutar, es necesario tener en cuenta las siguientes consideraciones.
