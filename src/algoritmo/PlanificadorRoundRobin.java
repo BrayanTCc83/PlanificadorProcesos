@@ -24,6 +24,7 @@ public class PlanificadorRoundRobin implements Observador<Proceso> {
 
     public void procesamientoCPU(Proceso proceso) {
         this.estaProcesando = true;
+        proceso.establecerTiempoSubida(tiempoGlobal);
         System.out.println("\nProcesando proceso " + proceso.recuperarNombre() + ", subio al procesador en el tiempo " + tiempoGlobal + " [ms].");
 
         for(int i = 0; i < quantum; i++) {
@@ -43,6 +44,7 @@ public class PlanificadorRoundRobin implements Observador<Proceso> {
         } else {
             proceso.establecerTiempoFinalizacion(tiempoGlobal);
             System.out.println("\nProceso " + proceso.recuperarNombre() + " ha terminado.");
+            GestorProcesos.recuperarGestorProcesos().agregarAProcesosFinalizados(proceso);
         }
         this.estaProcesando = false;
 
@@ -57,10 +59,6 @@ public class PlanificadorRoundRobin implements Observador<Proceso> {
             return;
         
         Proceso proceso = memoria.extraerProceso();
-        if (proceso.recuperarTiempoPrimeraSubida() == Proceso.NO_TIEMPO) {
-            proceso.establecerTiempoSubida(tiempoGlobal);
-        }
-
         procesamientoCPU(proceso);
     }
 
@@ -75,10 +73,6 @@ public class PlanificadorRoundRobin implements Observador<Proceso> {
         }
         this.estaPlanificando = false;
         planificarCortoPlazo();
-    }
-
-    public void mostrarTiemposPromedio() {
-        System.out.println("Se ha terminado la simulacion.");
     }
 
     public int obtenerTiempoGlobal() {

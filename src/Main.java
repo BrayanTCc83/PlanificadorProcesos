@@ -3,6 +3,7 @@ import memoria.GestorMemoria;
 import java.util.Scanner;
 
 import algoritmo.PlanificadorRoundRobin;
+import estructura.ColaSimple;
 import proceso.*;
 
 public class Main {
@@ -44,12 +45,40 @@ public class Main {
             System.out.println(gestorProcesos.recuperarColaOrdenada());
 
             gestorProcesos.iniciarSimulacion();
-            planificador.mostrarTiemposPromedio();
+            mostrarTiemposPromedio();
 
             scanner.close();
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            //System.out.println("Tiempo de respuesta para " + proceso.recuperarNombre() + ": " +  (tiempoGlobal - proceso.recuperarTiempoLlegada()));
         }
+    }
+
+    public static void mostrarTiemposPromedio() {
+        GestorProcesos gestorProcesos = GestorProcesos.recuperarGestorProcesos();
+        ColaSimple<Proceso> finalizados = gestorProcesos.recuperarProcesosFinalizados();
+
+        float n = finalizados.obtenerTamano();
+        float tiempoEsperaTotal = 0;
+        float tiempoRespuestaTotal = 0;
+        float tiempoEjecucionTotal = 0;
+        while(!finalizados.estaVacia()) {
+            Proceso proceso = finalizados.eliminar();
+            int tiempoEspera = proceso.recuperarTiempoUltimaSubida() - proceso.recuperarTiempoLlegada() - proceso.recuperarTiempoEjecucionPrevio();
+            int tiempoRespuesta = proceso.recuperarTiempoPrimeraSubida() - proceso.recuperarTiempoLlegada();
+            int tiempoEjecucion = proceso.recuperarTiempoFinalizacion() - proceso.recuperarTiempoLlegada();
+
+            tiempoEsperaTotal += tiempoEspera;
+            tiempoRespuestaTotal += tiempoRespuesta;
+            tiempoEjecucionTotal += tiempoEjecucion;
+
+            System.out.println("\n" + proceso);
+            System.out.println("\tTiempo de espera: " + tiempoEspera);
+            System.out.println("\tTiempo de respuesta: " + tiempoRespuesta);
+            System.out.println("\tTiempo de ejecucion: " + tiempoEjecucion);
+        }
+        System.out.println("\nEstadisticas finales");
+        System.out.println("\tTiempo de espera promedio: " + tiempoEsperaTotal / n);
+        System.out.println("\tTiempo de respuesta promedio: " + tiempoRespuestaTotal / n);
+        System.out.println("\tTiempo de ejecucion promedio: " + tiempoEjecucionTotal / n);
     }
 }

@@ -11,7 +11,8 @@ public class Proceso {
     private int tiempoPrimeraSubida = Proceso.NO_TIEMPO, 
                 tiempoUltimaSubida = Proceso.NO_TIEMPO, 
                 tiempoFinalizacion = Proceso.NO_TIEMPO, 
-                tiempoEjecutado = 0;
+                tiempoEjecutado = 0,
+                tiempoEjecucionPrevio = 0;
 
     public Proceso(String nombre, int tamano, int tiempoEjecucion, int tiempoLlegada) {
         this.id = Proceso.CONTEO_PROCESOS++;
@@ -42,20 +43,30 @@ public class Proceso {
     }
 
     public void establecerTiempoSubida(int tiempo) {
+        tiempoUltimaSubida = tiempo;
         if(tiempoPrimeraSubida == Proceso.NO_TIEMPO)
             tiempoPrimeraSubida = tiempo;
-        tiempoUltimaSubida = tiempo;
     }
 
     public int recuperarTiempoPrimeraSubida() {
         return this.tiempoPrimeraSubida;
     }
 
+    public int recuperarTiempoUltimaSubida() {
+        return this.tiempoUltimaSubida;
+    }
+
     public int recuperarTiempoFinalizacion() {
         return this.tiempoFinalizacion;
     }
 
+    public int recuperarTiempoEjecucionPrevio() {
+        return this.tiempoEjecucionPrevio;
+    }
+
     public void incrementarTiempoEjecutado(int tiempo) {
+        tiempoEjecucionPrevio = tiempoEjecutado;
+
         if(tiempoEjecutado + tiempo > tiempoEjecucion)
             tiempoEjecutado = tiempoEjecucion;
         else

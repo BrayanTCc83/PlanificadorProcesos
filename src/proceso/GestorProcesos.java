@@ -2,6 +2,7 @@ package proceso;
 
 import algoritmo.PlanificadorRoundRobin;
 import estructura.ColaOrdenada;
+import estructura.ColaSimple;
 import patrones.observer.Observable;
 import patrones.observer.Observador;
 
@@ -9,6 +10,7 @@ public class GestorProcesos implements Observable<Proceso> {
     private static GestorProcesos gestorProcesos = null;
 
     private ColaOrdenada colaProcesosParaGenerar;
+    private ColaSimple<Proceso> procesosFinalizados;
     private Observador<Proceso> observador = null;
 
     public static GestorProcesos recuperarGestorProcesos() {
@@ -19,6 +21,7 @@ public class GestorProcesos implements Observable<Proceso> {
     
     private GestorProcesos() {
         colaProcesosParaGenerar = new ColaOrdenada();
+        procesosFinalizados = new ColaSimple<>();
     }
 
     public void iniciarSimulacion() {
@@ -42,6 +45,14 @@ public class GestorProcesos implements Observable<Proceso> {
 
     public void prepararProceso(Proceso proceso) {
         colaProcesosParaGenerar.insertar(proceso);
+    }
+
+    public void agregarAProcesosFinalizados(Proceso proceso) {
+        procesosFinalizados.insertar(proceso);
+    }
+
+    public ColaSimple<Proceso> recuperarProcesosFinalizados() {
+        return this.procesosFinalizados;
     }
 
     @Override
