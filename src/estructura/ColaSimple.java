@@ -1,44 +1,53 @@
-package proceso;
+package estructura;
 
-public class ListaProcesos {
+public class ColaSimple<T> {
     private class Nodo {
-        Proceso proceso;
+        T value;
         Nodo siguiente;
     
-        public Nodo(Proceso proceso) {
-            this.proceso = proceso;
+        public Nodo(T value) {
+            this.value = value;
             this.siguiente = null;
         }
     }
 
     private Nodo head;
+    private int tamano;
 
-    public ListaProcesos() {
+    public ColaSimple() {
         this.head = null;
+        this.tamano = 0;
     }
 
-    public void insertarProceso(Proceso proceso) {
-        Nodo nuevoNodo = new Nodo(proceso);
+    public void insertar(T value) {
+        Nodo nuevoNodo = new Nodo(value);
         if (head == null) {
             head = nuevoNodo;
+            this.tamano++;
         } else {
             Nodo cursor = head;
             while (cursor.siguiente != null) {
                 cursor = cursor.siguiente;
             }
             cursor.siguiente = nuevoNodo;
+            this.tamano++;
         }
-        System.out.println("Subio el proceso ");
+        System.out.println("Subio el value ");
     }
 
-    public Proceso eliminarProceso() {
-        Proceso proceso = null;
+    public T eliminar() {
+        T value = null;
         if (head != null) {
-            proceso = head.proceso;
+            value = head.value;
             head = head.siguiente;
+            this.tamano--;
         }
-        System.out.println("Se eliminó el proceso ");
-        return proceso;
+        System.out.println("Se eliminó el value ");
+        return value;
+    }
+
+    public int obtenerTamano() {
+        return this.tamano;
     }
 
     @Override
@@ -47,7 +56,7 @@ public class ListaProcesos {
         int i = 0;
         Nodo cursor = head;
         while (cursor != null) {
-            string += "[" + i + "]" + cursor.proceso.toString() + "\n";
+            string += "[" + i + "]" + cursor.value.toString() + "\n";
             cursor = cursor.siguiente;
         }
         return string;

@@ -1,9 +1,9 @@
 .PHONY: compile run
 
-SOURCE=./src/
-TEMPORAL=./tmp
-BUILD=./build
-INPUTS=Main proceso/Proceso proceso/ListaProcesos
+SOURCE=src/
+TEMPORAL=tmp
+BUILD=build
+INPUTS=Main proceso/Proceso estructura/ColaSimple
 OUTPUT_FILE=$(BUILD)/planificadorprocesos.jar
 
 compile: $(OUTPUT_FILE)
