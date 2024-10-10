@@ -44,6 +44,7 @@ public class Proceso {
 
     public void establecerTiempoSubida(int tiempo) {
         tiempoUltimaSubida = tiempo;
+        tiempoEjecucionPrevio = tiempoEjecutado;
         if(tiempoPrimeraSubida == Proceso.NO_TIEMPO)
             tiempoPrimeraSubida = tiempo;
     }
@@ -65,8 +66,6 @@ public class Proceso {
     }
 
     public void incrementarTiempoEjecutado(int tiempo) {
-        tiempoEjecucionPrevio = tiempoEjecutado;
-
         if(tiempoEjecutado + tiempo > tiempoEjecucion)
             tiempoEjecutado = tiempoEjecucion;
         else
