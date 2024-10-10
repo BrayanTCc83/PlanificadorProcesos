@@ -7,19 +7,17 @@ public class Proceso {
     private final String nombre;
     private final int tamano;
     private final int tiempoEjecucion;
-    private final int prioridad;
     private final int tiempoLlegada;
     private int tiempoPrimeraSubida = Proceso.NO_TIEMPO, 
+                tiempoUltimaSubida = Proceso.NO_TIEMPO, 
                 tiempoFinalizacion = Proceso.NO_TIEMPO, 
-                tiempoEjecutado = Proceso.NO_TIEMPO, 
-                tiempoTotalEjecucion = Proceso.NO_TIEMPO;
+                tiempoEjecutado = 0;
 
-    public Proceso(String nombre, int tamano, int tiempoEjecucion, int prioridad, int tiempoLlegada) {
+    public Proceso(String nombre, int tamano, int tiempoEjecucion, int tiempoLlegada) {
         this.id = Proceso.CONTEO_PROCESOS++;
         this.nombre = nombre;
         this.tamano = tamano;
         this.tiempoEjecucion = tiempoEjecucion;
-        this.prioridad = prioridad;
         this.tiempoLlegada = tiempoLlegada;
     }
 
@@ -43,12 +41,10 @@ public class Proceso {
         return this.tiempoLlegada;
     }
 
-    public int recuperarPrioridad() {
-        return this.prioridad;
-    }
-
-    public void establecerTiempoPrimeraSubida(int tiempo) {
-        this.tiempoPrimeraSubida = tiempo;
+    public void establecerTiempoSubida(int tiempo) {
+        if(tiempoPrimeraSubida == Proceso.NO_TIEMPO)
+            tiempoPrimeraSubida = tiempo;
+        tiempoUltimaSubida = tiempo;
     }
 
     public int recuperarTiempoPrimeraSubida() {
@@ -60,7 +56,10 @@ public class Proceso {
     }
 
     public void incrementarTiempoEjecutado(int tiempo) {
-        this.tiempoEjecutado += tiempo;
+        if(tiempoEjecutado + tiempo > tiempoEjecucion)
+            tiempoEjecutado = tiempoEjecucion;
+        else
+            tiempoEjecutado += tiempo;
     }
 
     public void establecerTiempoFinalizacion(int tiempo) {
@@ -71,15 +70,20 @@ public class Proceso {
         return this.tiempoEjecutado;
     }
 
+    public boolean estaFinalizado() {
+        return tiempoEjecucion - tiempoEjecutado == 0;
+    }
+
     @Override
     public String toString() {
-        return "Proceso[" + this.id + "] "
+        return "Proceso "
         + "{ "
-            + "nombre: " + this.nombre + ", " 
-            + "tamaño: " + this.tamano + ", "
-            + "tiempo_llegada: " + this.tiempoLlegada + ", "
-            + "tiempo_ejecución: " + this.tiempoEjecucion + ", "
-            + "prioridad: " + this.prioridad + " "
+            + "id: " + id + ", " 
+            + "nombre: " + nombre + ", " 
+            + "tamaño: " + tamano + ", "
+            + "tiempo_llegada: " + tiempoLlegada + ", "
+            + "tiempo_ejecución: " + tiempoEjecucion + ", "
+            + "tiempo_restante: " + (tiempoEjecucion - tiempoEjecutado) + " "
         + "}";
     }
 

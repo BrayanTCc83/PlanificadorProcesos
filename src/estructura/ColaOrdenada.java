@@ -3,6 +3,12 @@ package estructura;
 import proceso.Proceso;
 
 public class ColaOrdenada extends ColaSimple<Proceso> {
+    public Proceso ultimoProceso() {
+        if(this.head == null)
+            return null;
+        return this.head.value;
+    }
+
     @Override
     public void insertar(Proceso proceso) {
         Nodo nuevoNodo = new Nodo(proceso);

@@ -3,7 +3,7 @@
 SOURCE=src/
 TEMPORAL=tmp
 BUILD=build
-INPUTS=Main proceso/Proceso estructura/ColaSimple
+INPUTS=Main proceso/Proceso proceso/GestorProcesos proceso/PlanificadorRoundRobin estructura/ColaSimple estructura/ColaOrdenada memoria/GestorMemoria patrones/observer/Observador patrones/observer/Observable
 OUTPUT_FILE=$(BUILD)/planificadorprocesos.jar
 
 compile: $(OUTPUT_FILE)

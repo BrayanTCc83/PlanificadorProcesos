@@ -32,6 +32,7 @@ public void insertar(T value) {
         cursor.siguiente = nuevoNodo;
         this.tamano++;
     }
+    System.out.println(this);
 }
 
 public T eliminar() {
