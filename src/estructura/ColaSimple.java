@@ -50,6 +50,10 @@ public class ColaSimple<T> {
         return this.tamano;
     }
 
+    public boolean estaVacia() {
+        return this.tamano == 0;
+    }
+
     @Override
     public String toString() {
         String string = "";
