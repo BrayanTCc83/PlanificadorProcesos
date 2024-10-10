@@ -3,13 +3,15 @@ package proceso;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import estructura.ColaSimple;
+
 public class PlanificadorRoundRobin {
     private final int quantum;
     private final Memoria memoria;
-    private final ListaProcesos lista;
+    private final ColaSimple<Proceso> lista;
     private int tiempoGlobal = 0;
 
-    public PlanificadorRoundRobin(int quantum, Memoria memoria, ListaProcesos lista) {
+    public PlanificadorRoundRobin(int quantum, Memoria memoria, ColaSimple<Proceso> lista) {
         this.quantum = quantum;
         this.memoria = memoria;
         this.lista = lista;
@@ -19,7 +21,7 @@ public class PlanificadorRoundRobin {
         Queue<Proceso> colaEjecucion = new LinkedList<>();
 
         while (!lista.estaVacia()) {
-            Proceso proceso = lista.eliminarProceso();
+            Proceso proceso = lista.eliminar();
             colaEjecucion.add(proceso);
         }
 
