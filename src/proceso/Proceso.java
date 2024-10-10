@@ -2,7 +2,7 @@ package proceso;
 
 public class Proceso {
     private static int CONTEO_PROCESOS = 1;
-    private static int NO_TIEMPO = -1;
+    public static final int NO_TIEMPO = -1;
     private final int id;
     private final String nombre;
     private final int tamano;
