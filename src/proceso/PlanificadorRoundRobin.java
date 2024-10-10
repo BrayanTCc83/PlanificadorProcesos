@@ -1,49 +1,49 @@
 package proceso;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import estructura.ColaSimple;
 
 public class PlanificadorRoundRobin {
     private final int quantum;
     private final Memoria memoria;
-    private final ColaSimple<Proceso> lista;
     private int tiempoGlobal = 0;
 
-    public PlanificadorRoundRobin(int quantum, Memoria memoria, ColaSimple<Proceso> lista) {
+    private ColaSimple<Proceso> colaEjecucion;
+
+    public PlanificadorRoundRobin(int quantum, Memoria memoria, ColaSimple<Proceso> colaProcesos) {
         this.quantum = quantum;
         this.memoria = memoria;
-        this.lista = lista;
+        this.colaEjecucion = colaProcesos;
     }
 
     public void ejecutar() {
-        Queue<Proceso> colaEjecucion = new LinkedList<>();
+        while (!colaEjecucion.estaVacia()) {
+            Proceso proceso = colaEjecucion.eliminar();
 
-        while (!lista.estaVacia()) {
-            Proceso proceso = lista.eliminar();
-            colaEjecucion.add(proceso);
-        }
-
-        while (!colaEjecucion.isEmpty()) {
-            Proceso proceso = colaEjecucion.poll();
             if (memoria.cargarProceso(proceso)) {
-                proceso.establecerTiempoPrimeraSubida(tiempoGlobal);
+                if (proceso.recuperarTiempoPrimeraSubida() == Proceso.NO_TIEMPO) {
+                    proceso.establecerTiempoPrimeraSubida(tiempoGlobal);
+
+                    System.out.println("Tiempo de respuesta para " + proceso.recuperarNombre() + ": " + 
+                    (tiempoGlobal - proceso.recuperarTiempoLlegada()));
+                }
 
                 int tiempoEjecutado = Math.min(quantum, proceso.recuperarTiempoEjecucion() - proceso.recuperarTiempoEjecutado());
                 proceso.incrementarTiempoEjecutado(tiempoEjecutado);
                 tiempoGlobal += tiempoEjecutado; 
 
                 if (proceso.recuperarTiempoEjecutado() < proceso.recuperarTiempoEjecucion()) {
-                    colaEjecucion.add(proceso);
-                    System.out.println("Proceso " + proceso.recuperarNombre() + " no ha terminado, vuelve a la cola de listos.");
+
+                    colaEjecucion.insertar(proceso);
+                    System.out.println("Proceso " + proceso.recuperarNombre() + " sin terminar, vuelve a la cola");
                 } else {
+
                     proceso.establecerTiempoFinalizacion(tiempoGlobal);
                     memoria.liberarMemoria(proceso);
                     System.out.println("Proceso " + proceso.recuperarNombre() + " ha terminado.");
                 }
             } else {
-                System.out.println("No se puede cargar el proceso " + proceso.recuperarNombre() + " en memoria.");
+
+                System.out.println("No se pudo cargar el proceso " + proceso.recuperarNombre());
             }
         }
     }
