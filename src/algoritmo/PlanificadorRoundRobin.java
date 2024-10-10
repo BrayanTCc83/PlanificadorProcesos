@@ -69,6 +69,7 @@ public class PlanificadorRoundRobin implements Observador<Proceso> {
             if(!memoria.insertarProceso(proceso)) {
                 System.out.println("La memoria esta llena, encolando proceso " + proceso.recuperarNombre() + " en listos nuevamente.");
                 colaListos.insertar(proceso);
+                break;
             }
         }
         this.estaPlanificando = false;
