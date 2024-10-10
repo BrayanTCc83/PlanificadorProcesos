@@ -23,13 +23,12 @@ Para poder usar el planificador de procesos, antes de compilar y ejecutar, es ne
 > sudo pacman -S make
 
 - En caso de trabajar con un sistema MacOS, el programa se incluye en el paquete de herramientas de Xcode, en caso de aún no tenerlo instalado puede usar:
-    > xcode-sellect --install
+> xcode-sellect --install
 
-- Finalmente, si se encuentra en Windows, es recomendable trabajar con un manejador de paquetes como [Chocolately](https://chocolatey.org/), para facilitar esta y otras instalaciones posteriores.
-    - Asumiendo que se tiene chocolately instalado, es posible que requiera de las herramientas de compilación de gnu. En tal caso, installe mingw desde su terminal  como administrador:
-    > choco install mingw
-    - Una vez instalado mingw, ejecute en la terminal:
-    > choco install make
+- Finalmente, si se encuentra en Windows, es recomendable trabajar con un manejador de paquetes como [Chocolately](https://chocolatey.org/), para facilitar esta y otras instalaciones posteriores, Asumiendo que se tiene chocolately instalado, es posible que requiera de las herramientas de compilación de gnu. En tal caso, installe mingw desde su terminal  como administrador:
+> choco install mingw
+- Una vez instalado mingw, ejecute en la terminal:
+> choco install make
 
 3. Es necesario tener Java instalado correctamente para trabajar, esto incluye el kit de desarrollo de Java y la Java virtual machine o entorno de ejecución de Java, para ello:
 
