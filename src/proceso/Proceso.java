@@ -10,7 +10,7 @@ public class Proceso {
     private final int prioridad;
     private final int tiempoLlegada;
     private int tiempoPrimeraSubida = Proceso.NO_TIEMPO, 
-                tiempoUltimaSubida = Proceso.NO_TIEMPO, 
+                tiempoFinalizacion = Proceso.NO_TIEMPO, 
                 tiempoEjecutado = Proceso.NO_TIEMPO, 
                 tiempoTotalEjecucion = Proceso.NO_TIEMPO;
 
@@ -47,23 +47,24 @@ public class Proceso {
         return this.prioridad;
     }
 
-    protected void establecerTiempoSubida(int tiempo) {
-        if(this.tiempoPrimeraSubida == Proceso.NO_TIEMPO)
-            this.tiempoPrimeraSubida = tiempo;
-
-        this.tiempoUltimaSubida = tiempo;
+    public void establecerTiempoPrimeraSubida(int tiempo) {
+        this.tiempoPrimeraSubida = tiempo;
     }
 
     public int recuperarTiempoPrimeraSubida() {
         return this.tiempoPrimeraSubida;
     }
 
-    public int recuperarTiempoUltimaSubida() {
-        return this.tiempoUltimaSubida;
+    public int recuperarTiempoFinalizacion() {
+        return this.tiempoFinalizacion;
     }
 
-    protected void incrementarTiempoEjecucion() {
-        this.tiempoEjecutado++;
+    public void incrementarTiempoEjecutado(int tiempo) {
+        this.tiempoEjecutado += tiempo;
+    }
+
+    public void establecerTiempoFinalizacion(int tiempo) {
+        this.tiempoFinalizacion = tiempo;
     }
 
     public int recuperarTiempoEjecutado() {
