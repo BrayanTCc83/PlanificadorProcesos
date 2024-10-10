@@ -73,4 +73,4 @@ Para ejecutar el jar obtenido es necesario ejecutar el siguiente comando si se e
 - **[Andrea Mata](https://github.com/AndreaMataRam)**
 - **[Brayan Téllez](https://github.com/BrayanTCc83)**
 - **[Janeth Irandy Reyes](https://github.com/IrandyR)**
-- **[Jorge Arturo Romero](https://github.com/JoarTactic)**
+- **[Jorge Arturo Romero Cervantes](https://github.com/JoarTactic)**
